@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosotros – AGICE</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628; --blue: #1a3a6b; --blue-mid: #1e5fa8;
+      --blue-light: #3b8ed4; --accent: #4fc3f7; --white: #ffffff;
+      --gray-light: #f4f6fa; --gray: #6b7a99; --text: #0d1b2e;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    nav {
+      position: sticky; top: 0; z-index: 100; background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 70px; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 48px; object-fit: contain; }
+    .nav-logo span { color: var(--white); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; max-width: 200px; line-height: 1.3; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 5rem 5% 4rem;
+      text-align: center;
+    }
+    .page-header h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 0.6rem; }
+    .page-header p { color: rgba(255,255,255,0.72); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+    section { padding: 5rem 5%; }
+    .section-label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); font-weight: 700; margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+    .divider { width: 56px; height: 4px; background: var(--accent); border-radius: 2px; margin: 1rem 0 2.5rem; }
+
+    /* MISION VISION */
+    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
+    .mv-card {
+      background: var(--gray-light); border-radius: 10px; padding: 2rem 1.8rem;
+      border-top: 4px solid var(--blue-light);
+    }
+    .mv-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .mv-card p { font-size: 0.95rem; color: var(--gray); }
+
+    /* ACTIVIDADES */
+    #actividades { background: var(--gray-light); }
+    .act-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+    .act-card {
+      background: var(--white); border-radius: 10px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(10,22,40,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .act-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(10,22,40,0.13); }
+    .act-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .act-card-body { padding: 1.4rem 1.6rem; }
+    .act-card-body h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+    .act-card-body .sub { font-size: 12px; color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .act-card-body p { font-size: 0.9rem; color: var(--gray); }
+
+    /* FOOTER */
+    footer { background: #060e1c; color: rgba(255,255,255,0.55); padding: 3rem 5% 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 1.6rem; }
+    .footer-brand img { height: 52px; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 13px; line-height: 1.65; max-width: 280px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.55rem; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12px; flex-wrap: wrap; gap: 0.5rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; }
+      .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: var(--navy); padding: 1.5rem 5%; gap: 1.2rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+      .nav-toggle { display: flex; }
+      .mv-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-logo">
+    <img src="https://static.wixstatic.com/media/78cbef_cc7f112f98da4129bd8499eb150318a7~mv2.png" alt="AGICE Logo" />
+    <span>Asociación Guatemalteca de Ingeniería y Ciencias Espaciales</span>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html" class="active">Nosotros</a></li>
+    <li><a href="eventos.html">Eventos</a></li>
+    <li><a href="recursos.html">Recursos</a></li>
+    <li><a href="logros.html">Logros</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-header">
+  <h1>Sobre nosotros</h1>
+  <p>Conoce quiénes somos, qué nos mueve y cómo trabajamos por el avance de las ciencias espaciales en Guatemala.</p>
+</div>
+
+<!-- MISIÓN Y VISIÓN -->
+<section>
+  <p class="section-label">Nuestra razón de ser</p>
+  <h2 class="section-title">Misión y Visión</h2>
+  <div class="divider"></div>
+  <div class="mv-grid">
+    <div class="mv-card">
+      <h3>🚀 Misión</h3>
+      <p>Proveer las herramientas necesarias para el desarrollo de las ciencias espaciales en Guatemala, siendo la organización líder en actividades de innovación e investigación del sector espacial en el país. Queremos ser los representantes de Guatemala en el sector espacial, nacional e internacionalmente.</p>
+    </div>
+    <div class="mv-card">
+      <h3>🌟 Visión</h3>
+      <p>Brindar herramientas educativas para formar una comunidad de líderes en el sector espacial en Guatemala, y generar proyectos de desarrollo tecnológico e investigación para el avance del sector, a través de colaboraciones con organizaciones nacionales e internacionales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LO QUE HACEMOS -->
+<section id="actividades">
+  <p class="section-label">Nuestras actividades</p>
+  <h2 class="section-title">Lo que hacemos</h2>
+  <div class="divider"></div>
+  <p style="color:var(--gray);max-width:620px;">Impulsamos el conocimiento y desarrollo en ingeniería y ciencias espaciales a través de múltiples iniciativas.</p>
+
+  <div class="act-grid">
+    <div class="act-card">
+      <img src="https://static.wixstatic.com/media/c2743b_580bc243a9a7437ab25038467f891bfb~mv2.jpeg" alt="Divulgación científica" />
+      <div class="act-card-body">
+        <div class="sub">Ciencia que inspira</div>
+        <h3>Divulgación científica</h3>
+        <p>Acercamos la ingeniería y las ciencias espaciales a más personas a través de contenido educativo y accesible en redes sociales. Queremos despertar la curiosidad y fomentar una cultura científica en Guatemala.</p>
+      </div>
+    </div>
+    <div class="act-card">
+      <img src="https://static.wixstatic.com/media/c2743b_4017621ce8bc484ab918f0720c24d8a0~mv2.jpeg" alt="Talleres y formación" />
+      <div class="act-card-body">
+        <div class="sub">Aprendizaje en acción</div>
+        <h3>Talleres y formación</h3>
+        <p>Ofrecemos espacios de formación práctica para desarrollar habilidades técnicas, creativas y de liderazgo. Nuestros talleres conectan el conocimiento con experiencias reales.</p>
+      </div>
+    </div>
+    <div class="act-card">
+      <img src="https://static.wixstatic.com/media/c2743b_467242bc1baa43e1b65efb1c873e8a6f~mv2.jpg" alt="Proyectos de investigación" />
+      <div class="act-card-body">
+        <div class="sub">Innovación con propósito</div>
+        <h3>Proyectos de investigación</h3>
+        <p>Impulsamos investigaciones que aborden retos científicos y sociales, promoviendo soluciones desde el conocimiento local y el trabajo colaborativo.</p>
+      </div>
+    </div>
+    <div class="act-card">
+      <img src="https://static.wixstatic.com/media/c2743b_982d379747ff4d2dbca8eacdf73918af~mv2.jpg" alt="Becas y convocatorias" />
+      <div class="act-card-body">
+        <div class="sub">Oportunidades que transforman</div>
+        <h3>Becas y convocatorias</h3>
+        <p>Facilitamos la preparación para becas, convocatorias y recursos educativos para que más personas puedan desarrollarse profesional y académicamente.</p>
+      </div>
+    </div>
+    <div class="act-card">
+      <img src="https://static.wixstatic.com/media/c2743b_00d15bf8170644abb121bab553796090~mv2.jpg" alt="Competencias y foros" />
+      <div class="act-card-body">
+        <div class="sub">Espacios para destacar</div>
+        <h3>Competencias y foros</h3>
+        <p>Organizamos competencias, retos y foros donde estudiantes y profesionales pueden mostrar su potencial, intercambiar ideas y construir redes de colaboración.</p>
+      </div>
+    </div>
+    <div class="act-card">
+      <img src="https://static.wixstatic.com/media/c2743b_8f8a5ca70c174b2398d777882244db14~mv2.jpg" alt="Alianzas estratégicas" />
+      <div class="act-card-body">
+        <div class="sub">Conectamos para crecer</div>
+        <h3>Alianzas estratégicas</h3>
+        <p>Trabajamos junto a universidades, colegios, instituciones y organizaciones nacionales e internacionales para crear proyectos de alto impacto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="https://static.wixstatic.com/media/78cbef_cc7f112f98da4129bd8499eb150318a7~mv2.png" alt="AGICE Logo" />
+      <p>Asociación Guatemalteca de Ingeniería y Ciencias Espaciales. Promovemos el desarrollo académico y profesional en ciencias espaciales en Guatemala.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menú</h4>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="recursos.html">Recursos</a></li>
+        <li><a href="logros.html">Logros</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Redes sociales</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/company/agice-gt/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/agice.gt/" target="_blank">Instagram</a></li>
+        <li><a href="https://x.com/agice_" target="_blank">X / Twitter</a></li>
+        <li><a href="https://www.facebook.com/ExploracionEspacialGt/" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AGICE – Asociación Guatemalteca de Ingeniería y Ciencias Espaciales</span>
+    <span><a href="https://agice.org/cdn-cgi/l/email-protection#ed84838b828c8a848e88ad8a808c8481c38e8280" style="color:rgba(255,255,255,0.45);"><span class="__cf_email__" data-cfemail="3950575f56585e505a5c795e54585055175a5654">[email&#160;protected]</span></a></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+</script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl508338'},{'dcenter':'p3'},{'cp_id':'10914502'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>

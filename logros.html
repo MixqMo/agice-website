@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logros – AGICE</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1628; --blue: #1a3a6b; --blue-mid: #1e5fa8;
+      --blue-light: #3b8ed4; --accent: #4fc3f7; --white: #ffffff;
+      --gray-light: #f4f6fa; --gray: #6b7a99; --text: #0d1b2e;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: var(--text); background: var(--white); line-height: 1.7; }
+    a { color: inherit; text-decoration: none; }
+    nav {
+      position: sticky; top: 0; z-index: 100; background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 70px; box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { height: 48px; object-fit: contain; }
+    .nav-logo span { color: var(--white); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; max-width: 200px; line-height: 1.3; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.82); font-size: 14px; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    .page-header {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 5rem 5% 4rem; text-align: center;
+    }
+    .page-header h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); margin-bottom: 0.6rem; }
+    .page-header p { color: rgba(255,255,255,0.72); font-size: 1rem; max-width: 580px; margin: 0 auto; }
+
+    section { padding: 5rem 5%; }
+    .section-label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); font-weight: 700; margin-bottom: 0.6rem; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+    .divider { width: 56px; height: 4px; background: var(--accent); border-radius: 2px; margin: 1rem 0 2.5rem; }
+
+    /* LOGROS */
+    .logros-list { display: flex; flex-direction: column; gap: 4rem; margin-top: 1rem; }
+
+    .logro {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .logro.reverse { direction: rtl; }
+    .logro.reverse > * { direction: ltr; }
+
+    .logro-img { border-radius: 12px; overflow: hidden; }
+    .logro-img img { width: 100%; height: 280px; object-fit: cover; display: block; }
+
+    .logro-text {}
+    .logro-num {
+      font-size: 3.5rem; font-weight: 900; color: #e8f4fd;
+      line-height: 1; margin-bottom: 0.4rem; letter-spacing: -0.02em;
+    }
+    .logro-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue-light); margin-bottom: 0.6rem;
+    }
+    .logro-text h3 { font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; line-height: 1.2; }
+    .logro-text p { font-size: 0.95rem; color: var(--gray); }
+
+    /* CTA */
+    .cta-band {
+      background: var(--navy); color: var(--white);
+      padding: 4rem 5%; text-align: center;
+    }
+    .cta-band h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.8rem; }
+    .cta-band p { color: rgba(255,255,255,0.7); margin-bottom: 1.8rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-band a {
+      display: inline-block; background: var(--accent); color: var(--navy);
+      padding: 0.85rem 2.2rem; border-radius: 4px;
+      font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .cta-band a:hover { background: #81d4fa; }
+
+    footer { background: #060e1c; color: rgba(255,255,255,0.55); padding: 3rem 5% 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 1.6rem; }
+    .footer-brand img { height: 52px; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 13px; line-height: 1.65; max-width: 280px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.55rem; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12px; flex-wrap: wrap; gap: 0.5rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; }
+      .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: var(--navy); padding: 1.5rem 5%; gap: 1.2rem; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+      .nav-toggle { display: flex; }
+      .logro, .logro.reverse { grid-template-columns: 1fr; direction: ltr; gap: 1.5rem; }
+      .logro-num { font-size: 2.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-logo">
+    <img src="https://static.wixstatic.com/media/78cbef_cc7f112f98da4129bd8499eb150318a7~mv2.png" alt="AGICE Logo" />
+    <span>Asociación Guatemalteca de Ingeniería y Ciencias Espaciales</span>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+    <li><a href="eventos.html">Eventos</a></li>
+    <li><a href="recursos.html">Recursos</a></li>
+    <li><a href="logros.html" class="active">Logros</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-header">
+  <h1>Logros</h1>
+  <p>Celebramos cada paso hacia el futuro. Estos son algunos de los proyectos y metas alcanzadas por nuestra comunidad.</p>
+</div>
+
+<section>
+  <p class="section-label">Nuestro impacto</p>
+  <h2 class="section-title">Hitos que nos enorgullecen</h2>
+  <div class="divider"></div>
+
+  <div class="logros-list">
+
+    <!-- 01 United Space School -->
+    <div class="logro">
+      <div class="logro-img">
+        <img src="https://static.wixstatic.com/media/c2743b_a9b34e17afdc4e0db3dc672506142df7~mv2.png" alt="United Space School" />
+      </div>
+      <div class="logro-text">
+        <div class="logro-num">01</div>
+        <div class="logro-tag">Programa Internacional</div>
+        <h3>United Space School</h3>
+        <p>Uno de nuestros mayores orgullos ha sido la participación continua de jóvenes guatemaltecos en el programa internacional United Space School, en Houston, Texas. Gracias a nuestra gestión y acompañamiento, estudiantes del país han tenido la oportunidad de colaborar con expertos de la NASA, convivir con jóvenes de todo el mundo y desarrollar proyectos espaciales de alto nivel, representando a Guatemala con excelencia.</p>
+      </div>
+    </div>
+
+    <!-- 02 Club Espacial IGA -->
+    <div class="logro reverse">
+      <div class="logro-img">
+        <img src="https://static.wixstatic.com/media/c2743b_d74af2db34dc4ce68ac7bc5af49fd229~mv2.jpg" alt="Club Espacial IGA" />
+      </div>
+      <div class="logro-text">
+        <div class="logro-num">02</div>
+        <div class="logro-tag">Educación escolar</div>
+        <h3>Club Espacial en IGA</h3>
+        <p>Con el fin de acercar la ciencia espacial a nuevas generaciones, impulsamos la creación del Club Espacial en el Colegio IGA, un espacio donde estudiantes de nivel escolar pueden aprender sobre astronomía, robótica, exploración espacial y ciencia aplicada a través de actividades lúdicas, talleres y retos.</p>
+      </div>
+    </div>
+
+    <!-- 03 Cohetería experimental -->
+    <div class="logro">
+      <div class="logro-img">
+        <img src="https://static.wixstatic.com/media/c2743b_820ac06cfe5f427093ac68c343e41ebd~mv2.jpg" alt="Cohetería experimental" />
+      </div>
+      <div class="logro-text">
+        <div class="logro-num">03</div>
+        <div class="logro-tag">Ingeniería aplicada</div>
+        <h3>Cohetería experimental</h3>
+        <p>Nuestro programa de Cohetería Experimental fomenta el aprendizaje práctico de la física, la ingeniería y el diseño aeroespacial mediante el desarrollo y lanzamiento de cohetes construidos por estudiantes y profesionales. Esta iniciativa permite experimentar directamente con sistemas de propulsión, estructuras y simulaciones reales, promoviendo la innovación y la rigurosidad técnica.</p>
+      </div>
+    </div>
+
+    <!-- 04 Syllektis -->
+    <div class="logro reverse">
+      <div class="logro-img">
+        <img src="https://static.wixstatic.com/media/c2743b_a1a4379d187f499cabf72fed4e9d5c8c~mv2.jpg" alt="Syllektis rover lunar" />
+      </div>
+      <div class="logro-text">
+        <div class="logro-num">04</div>
+        <div class="logro-tag">Investigación y desarrollo</div>
+        <h3>Syllektis</h3>
+        <p>Syllektis es un proyecto desarrollado por un equipo multidisciplinario de jóvenes guatemaltecos enfocados en el diseño de un rover lunar autónomo para recolección y construcción en superficies extraterrestres. Su trabajo fue presentado en el Congreso Espacial Centroamericano (CEC 2023) en Costa Rica, demostrando el talento nacional y el potencial de la juventud en la exploración espacial.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>¿Quieres ser parte de estos logros?</h2>
+  <p>Únete a AGICE y contribuye al crecimiento del sector espacial en Guatemala.</p>
+  <a href="index.html#contacto">Contáctanos</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="https://static.wixstatic.com/media/78cbef_cc7f112f98da4129bd8499eb150318a7~mv2.png" alt="AGICE Logo" />
+      <p>Asociación Guatemalteca de Ingeniería y Ciencias Espaciales. Promovemos el desarrollo académico y profesional en ciencias espaciales en Guatemala.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menú</h4>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="recursos.html">Recursos</a></li>
+        <li><a href="logros.html">Logros</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Redes sociales</h4>
+      <ul>
+        <li><a href="https://www.linkedin.com/company/agice-gt/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/agice.gt/" target="_blank">Instagram</a></li>
+        <li><a href="https://x.com/agice_" target="_blank">X / Twitter</a></li>
+        <li><a href="https://www.facebook.com/ExploracionEspacialGt/" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AGICE – Asociación Guatemalteca de Ingeniería y Ciencias Espaciales</span>
+    <span><a href="https://agice.org/cdn-cgi/l/email-protection#1f767179707e78767c7a5f78727e7673317c7072" style="color:rgba(255,255,255,0.45);"><span class="__cf_email__" data-cfemail="b3daddd5dcd2d4dad0d6f3d4ded2dadf9dd0dcde">[email&#160;protected]</span></a></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+</script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl508338'},{'dcenter':'p3'},{'cp_id':'10914502'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>
